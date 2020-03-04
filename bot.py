@@ -1,34 +1,43 @@
 import random
 
-letras = open("trap.txt", "r")
+canciones = ["Tumbado el Club",
+"Goteo",
+"c90",
+"Casipegao",
+"Para Sacarmelo",
+"Kaiosama",
+"Like Boss",
+"So Fresh",
+"Ni Bien Ni Mal",
+"Cartoon Network",
+"La Cancion",
+"McFly",
+"High"
+]
 
-versos = letras.read().split("\n")
+c_titulo = canciones[len(canciones) - 1]#[random.randrange(len(canciones))]
 
-canciones = []
+c_arhivo = open(c_titulo + ".txt", "r")
 
-i = 0
-c_cancion = [[],""]
-while i < len(versos):
-	if versos[i] != "-":
-		c_cancion[0].append(versos[i])
+versos = c_arhivo.read().split("\n")
+
+letra = []
+artista = ""
+
+for i, v in enumerate(versos):
+	if i < len(versos) - 1:
+		letra.append(v)
 	else:
-		c_cancion[1] = versos[i + 1]
-		i += 1
-		canciones.append(c_cancion)
-		c_cancion = [[],""]
+		artista = v
 
-	i += 1
-
-c = canciones[random.randrange(len(canciones))]
 n = random.randint(1,3)
-
-v_inicial = random.randint(0,len(c[0]) - n)
+verso_inicial = random.randint(0, len(letra) - n)
 
 txt = ""
 
-for l in range(n):
-	txt += c[0][v_inicial + l] + "\n"
+for i in range(n):
+	txt += letra[verso_inicial + i] + "\n"
 
-txt += "(" + c[1] + ")"
+txt += "(" + artista + ")"
 
 print(txt)
