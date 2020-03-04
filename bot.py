@@ -1,8 +1,11 @@
+import tweepy
+from secrets import *
+
 import random
 
 from canciones import *
 
-c_titulo = canciones[len(canciones) - 1]#[random.randrange(len(canciones))]
+c_titulo = canciones[random.randrange(len(canciones))]
 
 c_arhivo = open(c_titulo + ".txt", "r")
 
@@ -27,4 +30,8 @@ for i in range(n):
 
 txt += "(" + artista + ")"
 
-print(txt)
+auth = tweepy.OAuthHandler(C_KEY, C_SECRET)  
+auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)  
+api = tweepy.API(auth)
+
+api.update_status(txt.encode("latin1").decode("utf-8"))
