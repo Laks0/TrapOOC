@@ -28,10 +28,12 @@ txt = ""
 for i in range(n):
 	txt += letra[verso_inicial + i] + "\n"
 
-txt += "(" + artista + ")"
-
 auth = tweepy.OAuthHandler(C_KEY, C_SECRET)  
 auth.set_access_token(A_TOKEN, A_TOKEN_SECRET)  
 api = tweepy.API(auth)
 
 api.update_status(txt.encode("latin1").decode("utf-8"))
+#print(txt)
+
+tweet = api.user_timeline(id = api.me().id, count = 1)[0]
+api.update_status("(" + artista + ")", tweet.id)
